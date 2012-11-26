@@ -18,13 +18,11 @@ class App extends CI_Controller {
       $data['content'] = 'app/index_view';
 
       foreach($all_list as $list) {
-        $username = $this->model_users->get_user_by_id($list->users_id);
-        $data['all_list']['list']['user_id'][] = $username->id;
-        $data['all_list']['list']['username'][] = $username->username;
+        $data['all_list']['list']['user_id'][] = $list->users_id;
+        $data['all_list']['list']['username'][] = $list->username;
         $data['all_list']['list']['list_id'][] = $list->id;
         $data['all_list']['list']['title'][] = $list->title;
-        $priority = $this->model_priority->priority_by_id($list->priority_id);
-        $data['all_list']['list']['priority'][] = $priority->level;
+        $data['all_list']['list']['priority'][] = $list->level;
         $data['all_list']['list']['date_added'][] = $list->date_added;
         $data['all_list']['list']['date_complete'][] = $list->date_complete;
         $data['all_list']['list']['status'][] = $list->status;

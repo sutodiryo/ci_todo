@@ -5,18 +5,16 @@ class Model_list extends CI_Model {
     parent::__construct();
   }
   
-  public function all_list($users_id = NULL) {
-    if($users_id) {
-      $where = array(
-        'users_id' => $users_id
-      );
-      $this->db->order_by('date_added', 'DESC');
-      $query = $this->db->get_where('list', $where);
-    } else {
-      $this->db->order_by('date_added', 'DESC');
-      $query = $this->db->get('list');
-    }
- 
+  public function all_list($users_id) {
+    $where = array(
+      'users_id' => $users_id
+    );
+
+    $this->db->join('users', 'users.id = list.users_id', 'INNER');
+    $this->db->join('priority', 'priority.id = list.priority_id', 'INNER');
+    $this->db->order_by('date_added', 'DESC');
+    $query = $this->db->get_where('list', $where);
+
     if($query->num_rows() > 0) {
       return $query->result();
     } else {
