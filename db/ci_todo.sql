@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `list` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `lid` int(11) NOT NULL AUTO_INCREMENT,
   `users_id` int(11) NOT NULL,
   `priority_id` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,

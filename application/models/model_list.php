@@ -35,7 +35,7 @@ class Model_list extends CI_Model {
 
   public function list_by_id($list_id) {
     $where = array(
-      'id' => $list_id
+      'lid' => $list_id
     );
     $query = $this->db->get_where('list', $where);
     
@@ -57,7 +57,7 @@ class Model_list extends CI_Model {
       );
     }
     $where = array(
-      'id' => $id
+      'lid' => $id
     );
     $query = $this->db->update('list', $set, $where);
     
@@ -70,7 +70,7 @@ class Model_list extends CI_Model {
   
   public function check_user($list_id, $users_id) {
     $where = array(
-      'id' => $list_id,
+      'lid' => $list_id,
       'users_id' => $users_id
     );
     $query = $this->db->get_where('list', $where);
@@ -108,7 +108,7 @@ class Model_list extends CI_Model {
     );
     
     $where = array(
-      'id' => $list_id
+      'lid' => $list_id
     );
     
     $query = $this->db->update('list', $data, $where);
@@ -122,7 +122,7 @@ class Model_list extends CI_Model {
   
   public function remove_task($list_id) {
     $where = array(
-      'id' => $list_id
+      'lid' => $list_id
     );
     
     $query = $this->db->delete('list', $where);

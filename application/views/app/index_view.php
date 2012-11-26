@@ -1,5 +1,4 @@
 <div id="content">
-  <?= $this->uri->segment(3) ?>
   <table border="1">
     <tr>
       <th>By User</th>

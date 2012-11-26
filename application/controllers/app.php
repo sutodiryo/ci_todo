@@ -26,7 +26,7 @@ class App extends CI_Controller {
       foreach($all_list as $list) {
         $data['all_list']['list']['user_id'][] = $list->users_id;
         $data['all_list']['list']['username'][] = $list->username;
-        $data['all_list']['list']['list_id'][] = $list->id;
+        $data['all_list']['list']['list_id'][] = $list->lid;
         $data['all_list']['list']['title'][] = $list->title;
         $data['all_list']['list']['priority'][] = $list->level;
         $data['all_list']['list']['date_added'][] = $list->date_added;
