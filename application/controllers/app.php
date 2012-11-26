@@ -41,6 +41,25 @@ class App extends CI_Controller {
   }
   
   public function add_todo() {
+    $data['options'] = array(
+      1 => 'High',
+      2 => 'Medium',
+      3 => 'Low'
+    );
+
+    for($i = 1; $i <= 31; $i++) {
+      $data['day'][$i] = $i;
+    }
+
+    for($i = 1; $i <= 12; $i++) {
+      $data['month'][$i] = $i;
+    }
+
+    $this_year = date('Y');
+    for($i = $this_year; $i <= $this_year+20; $i++) {
+      $data['year'][$i] = $i;
+    }
+
     $data['header'] = 'Add New Item To List';
     $data['content'] = 'app/add_view';
     $this->load->view(TEMPLATE, $data);

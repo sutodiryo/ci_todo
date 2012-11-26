@@ -1,24 +1,3 @@
-<?php
-  $options = array(
-    1 => 'High',
-    2 => 'Medium',
-    3 => 'Low'
-  );
-  
-  for($i = 1; $i <= 31; $i++) {
-    $day[$i] = $i;
-  }
-  
-  for($i = 1; $i <= 12; $i++) {
-    $month[$i] = $i;
-  }
-  
-  $this_year = date('Y');
-  for($i = $this_year; $i <= $this_year+20; $i++) {
-    $year[$i] = $i;
-  }
-?>
-
 <div id="contact">
   <h1>ToDo</h1>
   <?php if(validation_errors()): ?>

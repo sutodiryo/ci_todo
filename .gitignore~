@@ -1,8 +1,5 @@
 # NetBeans Project
 nbproject/*
 
-# email configuration
-application/config/email.php
-
 # system files
 system/*
