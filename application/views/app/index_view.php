@@ -1,4 +1,5 @@
 <div id="content">
+  <?= $this->uri->segment(3) ?>
   <table border="1">
     <tr>
       <th>By User</th>
@@ -34,7 +35,8 @@
           <?php if ($this->session->userdata('id') == $list['user_id'][$i]): ?>
               <td>
                 <?= anchor('app/edit_task/' . $list['list_id'][$i], 'Edit') ?>
-                <?= anchor('app/remove_task/' . $list['list_id'][$i], 'Delete') ?>
+                <?= anchor('app/remove_task/' . $list['list_id'][$i] .
+                  '/' . $this->uri->segment(3), 'Delete') ?>
               </td>
           <?php else: ?>
             <td>&nbsp;</td>
@@ -42,5 +44,6 @@
         </tr>
       <?php endfor; ?>
     <?php endforeach; ?>
+    <?= $pages ?>
   </table>
 </div>

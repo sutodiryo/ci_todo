@@ -9,8 +9,14 @@ class App extends CI_Controller {
     }
   }
   
-  public function index() {
-    $all_list = $this->model_list->all_list($this->session->userdata('id'));
+  public function index($start = 0) {
+    $all_list = $this->model_list->all_list(
+      $this->session->userdata('id'), 5, $start);
+    $config['base_url'] = base_url() . 'app/index';
+    $config['total_rows'] = $this->model_list->list_count($this->session->userdata('id'));
+    $config['per_page'] = 5;
+    $this->pagination->initialize($config);
+    $data['pages'] = $this->pagination->create_links();
     
     if(!$all_list) {
       $data['content'] = 'app/empty_view';
@@ -83,11 +89,11 @@ class App extends CI_Controller {
     }
   }
   
-  public function remove_task($list_id) {
+  public function remove_task($list_id, $uri) {
     if($this->model_list->check_user($list_id, $this->session->userdata('id'))) {
       $this->model_list->remove_task($list_id);
     }
-    redirect('app/index');
+    redirect('app/index/' . $uri);
   }
   
   public function edit_task($list_id) {

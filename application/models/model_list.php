@@ -5,15 +5,14 @@ class Model_list extends CI_Model {
     parent::__construct();
   }
   
-  public function all_list($users_id) {
+  public function all_list($users_id, $num = 5, $start = 0) {
     $where = array(
       'users_id' => $users_id
     );
-
     $this->db->join('users', 'users.id = list.users_id', 'INNER');
     $this->db->join('priority', 'priority.id = list.priority_id', 'INNER');
     $this->db->order_by('date_added', 'DESC');
-    $query = $this->db->get_where('list', $where);
+    $query = $this->db->get_where('list', $where, $num, $start);
 
     if($query->num_rows() > 0) {
       return $query->result();
@@ -22,6 +21,18 @@ class Model_list extends CI_Model {
     }
   }
   
+  public function list_count($users_id) {
+    $where = array(
+      'users_id' => $users_id
+    );
+    $query = $this->db->get_where('list', $where);
+    if($query->num_rows() > 0) {
+      return $query->num_rows();
+    } else {
+      return FALSE;
+    }
+  }
+
   public function list_by_id($list_id) {
     $where = array(
       'id' => $list_id
