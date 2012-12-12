@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'https://horki.pagekite.me/Ivan/CodeIgniter_Test/todo_git/';//Needed to add your own 'url'
+$config['base_url']	= '';//Needed to add your own 'url'
 
 /*
 |--------------------------------------------------------------------------

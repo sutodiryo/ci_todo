@@ -27,17 +27,17 @@ class Site extends CI_Controller {
 
     public function login_validation() {
     $this->form_validation->set_rules('username', 'Username',
-      'trim|required|callback_login_check');
+      'trim|required|min_length[5]|max_length[25]|callback_login_check');
     $this->form_validation->set_rules('password', 'Password',
-      'trim|required|md5');
+      'trim|required|min_length[6]|max_length[12]|md5');
     
     if($this->form_validation->run()) {
       $user = $this->model_users->get_user_by_username($this->input->post('username'));
       
       $session_data = array(
-        'id' => $user->id,
+        'id'       => $user->id,
         'username' => $user->username,
-        'email' => $user->email
+        'email'    => $user->email
       );
       $this->session->set_userdata($session_data);
       
@@ -65,7 +65,7 @@ class Site extends CI_Controller {
   
   public function signup_validation() {
     $this->form_validation->set_rules('username', 'Username',
-      'required|trim|min_length[5]|max_length[12]|is_unique[users.username]');
+      'required|trim|min_length[5]|max_length[25]|is_unique[users.username]');
     $this->form_validation->set_rules('email', 'E-mail',
       'required|trim|valid_email|is_unique[users.email]');
     $this->form_validation->set_rules('password', 'Password',

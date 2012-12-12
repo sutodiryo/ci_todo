@@ -4,18 +4,21 @@
     <p><?= validation_errors() ?></p>
   <?php endif; ?>
   
-  <?= form_open('site/login_validation') ?>
+  <?php $attributes = array('id' => 'form-login'); ?>
+  <?= form_open('site/login_validation', $attributes) ?>
   <p>Username:
-    <?= form_input('username', $this->input->post('username')) ?>
+    <?php $username = array('id' => 'username', 'name' => 'username'); ?>
+    <?= form_input($username, $this->input->post('username')) ?>
   </p>
   <p>Password:
-    <?= form_password('password', $this->input->post('password')) ?>
+    <?php $password = array('id' => 'password', 'name' => 'password'); ?>
+    <?= form_password($password, $this->input->post('password')) ?>
   </p>
   <p>
     <?= form_submit('submit', 'Submit') ?>
   </p>
   <?= form_close() ?>
-   
+
   <p>
     Not a member?<br />
    <i><?= anchor('site/signup', 'Sign Up') ?></i>

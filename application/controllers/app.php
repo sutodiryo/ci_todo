@@ -71,7 +71,7 @@ class App extends CI_Controller {
   
   public function add_validation() {
     $this->form_validation->set_rules('title', 'Task',
-      'required|trim|min_length[6]|max_length[255]');
+      'required|trim|min_length[5]|max_length[255]');
     
     $date = $this->input->post('year') . '-' . $this->input->post('month')
       . '-' . $this->input->post('day');
@@ -109,7 +109,7 @@ class App extends CI_Controller {
   
   public function edit_validation() {
     $this->form_validation->set_rules('title', 'Task',
-      'required|trim|min_length[6]|max_length[255]');
+      'required|trim|min_length[5]|max_length[255]');
     
     $date = $this->input->post('year') . '-' . $this->input->post('month')
       . '-' . $this->input->post('day');

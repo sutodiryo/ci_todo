@@ -24,10 +24,12 @@
   <?php if(validation_errors()): ?>
     <p><?= validation_errors() ?></p>
   <?php endif; ?>
-  <?= form_open('app/edit_validation') ?>
-    <?= form_hidden('id', $edit_form->id) ?>
+  <?php $attributes = array('id' => 'form-add-edit'); ?>
+  <?= form_open('app/edit_validation', $attributes) ?>
+    <?= form_hidden('id', $edit_form->lid) ?>
     <p>Task:
-      <?= form_textarea('title', $edit_form->title) ?>
+      <?php $title = array('id' => 'title', 'name' => 'title'); ?>
+      <?= form_textarea($title, $edit_form->title) ?>
     </p>
     <p>
       Priority:

@@ -6,3 +6,7 @@ application/config/email.php
 
 # system files
 system/*
+
+# jquery lib
+js/jquery-1.6.1.min.js
+js/jquery.validate.js

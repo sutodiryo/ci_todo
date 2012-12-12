@@ -3,9 +3,11 @@
   <?php if(validation_errors()): ?>
     <p><?= validation_errors() ?></p>
   <?php endif; ?>
-  <?= form_open('app/add_validation') ?>
+  <?php $attributes = array('id' => 'form-add-edit'); ?>
+  <?= form_open('app/add_validation', $attributes) ?>
     <p>Task:
-      <?= form_textarea('title', $this->input->post('title')) ?>
+      <?php $title = array('id' => 'title', 'name' => 'title'); ?>
+      <?= form_textarea($title, $this->input->post('title')) ?>
     </p>
     <p>Priority:
       <?= form_dropdown('priority', $options) ?>
