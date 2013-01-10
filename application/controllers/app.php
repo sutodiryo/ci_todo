@@ -28,7 +28,6 @@ class App extends CI_Controller {
     } else {
       $data['content'] = 'app/index_view';
     
-
       foreach($all_list as $list) {
         $data['all_list']['list']['user_id'][] = $list->users_id;
         $data['all_list']['list']['username'][] = $list->username;
