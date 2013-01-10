@@ -19,9 +19,15 @@ class App extends CI_Controller {
     $data['pages'] = $this->pagination->create_links();
     
     if(!$all_list) {
-      $data['content'] = 'app/empty_view';
+      if($this->uri->segment(3) > 0) {
+        $start -= 5;
+        redirect('app/index/' . $start);
+      } else {
+        $data['content'] = 'app/empty_view';
+      }
     } else {
       $data['content'] = 'app/index_view';
+    
 
       foreach($all_list as $list) {
         $data['all_list']['list']['user_id'][] = $list->users_id;
