@@ -18,7 +18,7 @@
       <ul>
         <li><?= anchor(base_url(), 'Home') ?></li>
         <li><?= anchor('app/user_info', 'My Info') ?></li>
-        <li><?= anchor('app/add_todo', 'Add New Task') ?></li>
+        <li><?= anchor('app/add_todo' , 'Add New Task') ?></li>
         <li> |Hello! <?= $this->session->userdata('username') ?>| </li>
         <li><?= anchor('site/logout', 'Logout') ?></li>
       </ul>

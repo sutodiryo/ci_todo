@@ -27,6 +27,7 @@
   <?php $attributes = array('id' => 'form-add-edit'); ?>
   <?= form_open('app/edit_validation', $attributes) ?>
     <?= form_hidden('id', $edit_form->lid) ?>
+    <?= form_hidden('uri', $uri) ?>
     <p>Task:
       <?php $title = array('id' => 'title', 'name' => 'title'); ?>
       <?= form_textarea($title, $edit_form->title) ?>

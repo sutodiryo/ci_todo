@@ -11,16 +11,16 @@ class App extends CI_Controller {
   
   public function index($start = 0) {
     $all_list = $this->model_list->all_list(
-      $this->session->userdata('id'), 5, $start);
+      $this->session->userdata('id'), PER_PAGE, $start);
     $config['base_url'] = base_url() . 'app/index';
     $config['total_rows'] = $this->model_list->list_count($this->session->userdata('id'));
-    $config['per_page'] = 5;
+    $config['per_page'] = PER_PAGE;
     $this->pagination->initialize($config);
     $data['pages'] = $this->pagination->create_links();
     
     if(!$all_list) {
       if($this->uri->segment(3) > 0) {
-        $start -= 5;
+        $start -= PER_PAGE;
         redirect('app/index/' . $start);
       } else {
         $data['content'] = 'app/empty_view';
@@ -42,14 +42,16 @@ class App extends CI_Controller {
    $this->load->view(TEMPLATE, $data);
   }
   
-  public function check($list_id, $status) {
+  public function check($list_id, $status, $uri) {
     if($this->model_list->check_user($list_id, $this->session->userdata('id'))) {
       $this->model_list->check_by_id($list_id, $status);
     }
-    redirect('app/index');
+    redirect('app/index/' . $uri);
   }
   
-  public function add_todo() {
+  public function add_todo($uri = 0) {
+    $data['uri'] = $uri;
+    
     $data['options'] = array(
       1 => 'High',
       2 => 'Medium',
@@ -84,7 +86,16 @@ class App extends CI_Controller {
     if($this->form_validation->run()) {
       $add_task = $this->model_list->add_task($this->session->userdata('id'), $date);
       if($add_task) {
-        redirect('app/index');
+        $count = $this->model_list->list_count($this->session->userdata('id'));
+        //echo $count; die(); KAKO NAPRAVITI DA MI SE POJAVI NA ZADNJEM!!!???
+        if($count <= PER_PAGE) {
+          redirect('app/index');
+        } elseif($count % PER_PAGE == 0) {
+          redirect('app/index/' . $count);
+        } elseif($count % PER_PAGE != 0) {
+          $count = $count + (PER_PAGE - ($count % PER_PAGE));
+          redirect('app/index/' . $count);
+        }
       } else {
         $this->add_todo();
       }
@@ -97,12 +108,16 @@ class App extends CI_Controller {
   public function remove_task($list_id, $uri) {
     if($this->model_list->check_user($list_id, $this->session->userdata('id'))) {
       $this->model_list->remove_task($list_id);
+      redirect('app/index/' . $uri);
+    } else {
+      redirect('app/index');
     }
-    redirect('app/index/' . $uri);
+    
   }
   
-  public function edit_task($list_id) {
+  public function edit_task($list_id, $uri = 0) {
     if($this->model_list->check_user($list_id, $this->session->userdata('id'))) {
+      $data['uri'] = $uri;
       $data['content'] = 'app/edit_view';
       $data['edit_form'] = $this->model_list->list_by_id($list_id);
       list($data['form_year'], $data['form_month'], $data['form_day']) = explode('-', $data['edit_form']->date_complete);
@@ -122,7 +137,7 @@ class App extends CI_Controller {
     if($this->form_validation->run()) {
       $edit_task = $this->model_list->update_task($this->input->post('id'), $date);
       if($edit_task) {
-        redirect('app/index');
+        redirect('app/index/' . $this->input->post('uri'));
       } else {
         $this->edit_task($this->input->post('id'));
       }

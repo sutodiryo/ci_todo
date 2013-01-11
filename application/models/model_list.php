@@ -5,7 +5,7 @@ class Model_list extends CI_Model {
     parent::__construct();
   }
   
-  public function all_list($users_id, $num = 5, $start = 0) {
+  public function all_list($users_id, $num = PER_PAGE, $start = 0) {
     $where = array(
       'users_id' => $users_id
     );

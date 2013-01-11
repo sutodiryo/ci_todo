@@ -20,22 +20,21 @@
           <td><?= $list['date_complete'][$i] ?></td>
           <?php if($list['status'][$i] == 0): ?>
             <?php if ($this->session->userdata('id') == $list['user_id'][$i]): ?>
-          <td><?= anchor('app/check/' . $list['list_id'][$i] . '/0' , 'Undone') ?></td>
+          <td><?= anchor('app/check/' . $list['list_id'][$i] . '/0/' . $this->uri->segment(3)  , 'Undone') ?></td>
             <?php else: ?>
               <td>Undone</td>
             <?php endif; ?>
           <?php else: ?>
             <?php if ($this->session->userdata('id') == $list['user_id'][$i]): ?>
-              <td><?= anchor('app/check/' . $list['list_id'][$i] . '/1' , 'Done') ?></td>
+              <td><?= anchor('app/check/' . $list['list_id'][$i] . '/1/' . $this->uri->segment(3) , 'Done') ?></td>
             <?php else: ?>
               <td>Done</td>
             <?php endif; ?>
           <?php endif; ?>
           <?php if ($this->session->userdata('id') == $list['user_id'][$i]): ?>
               <td>
-                <?= anchor('app/edit_task/' . $list['list_id'][$i], 'Edit') ?>
-                <?= anchor('app/remove_task/' . $list['list_id'][$i] .
-                  '/' . $this->uri->segment(3), 'Delete') ?>
+                <?= anchor('app/edit_task/' . $list['list_id'][$i] . '/' . $this->uri->segment(3), 'Edit') ?>
+                <?= anchor('app/remove_task/' . $list['list_id'][$i] . '/' . $this->uri->segment(3), 'Delete') ?>
               </td>
           <?php else: ?>
             <td>&nbsp;</td>
